@@ -23,13 +23,11 @@
 using iroha::main::BlockLoader;
 
 /**
- * @given json of a block
- *
- * @when convert json to block using raw block loader
- *
- * @then check that block is correct
+ * @given block in json format
+ * @when converting json to block using raw block loader
+ * @then check that the block is correct
  */
-TEST(BlockLoaderTest, BlockLoaderWhenParseBlock) {
+TEST(BlockLoaderTest, BlockLoaderJsonParsing) {
   BlockLoader loader;
   auto str =
       R"({
@@ -43,6 +41,8 @@ TEST(BlockLoaderTest, BlockLoaderWhenParseBlock) {
 })";
 
   auto block = loader.parseBlock(str);
+
+
 
   ASSERT_TRUE(block);
   auto b = block.value();
