@@ -75,6 +75,7 @@ git clone https://github.com/google/protobuf
 (cd ./protobuf ; git checkout b5fbb742af122b565925987e65c08957739976a7)
 cmake -Dprotobuf_BUILD_TESTS=OFF -DCMAKE_BUILD_TYPE="$BUILD_TYPE" -H./protobuf/cmake -B./protobuf/host_build # build for host to get js_embed
 VERBOSE=1 cmake --build ./protobuf/host_build -- -j"$CORES"
+# to be able to run js_embed we need its host version
 sed -i.bak "s~COMMAND js_embed~COMMAND \"$PWD/protobuf/host_build/js_embed\"~" ./protobuf/cmake/libprotoc.cmake
 
 LDFLAGS="-llog -landroid" cmake "${ANDROID_TOOLCHAIN_ARGS[@]}" "${INSTALL_ARGS[@]}" -Dprotobuf_BUILD_TESTS=OFF -DCMAKE_BUILD_TYPE="$BUILD_TYPE" -H./protobuf/cmake -B./protobuf/.build
